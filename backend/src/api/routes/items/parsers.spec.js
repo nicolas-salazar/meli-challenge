@@ -1,6 +1,13 @@
 const { expect } = require('chai');
-const { parseSearchResultData, getCategories, parseSearchResults } = require('./parsers');
-const { MELI_SEARCH_RESPONSE_SAMPLE } = require('../../../test-data/meli-responses-samples');
+const {
+  getCategories,
+  getItemFreeShippingAttribute,
+  getItemPicture,
+  parseSearchResultData,
+  parseSearchResults,
+  parseItemDetailData,
+} = require('./parsers');
+const { MELI_SEARCH_RESPONSE_SAMPLE, MELI_DETAIL_RESPONSE_SAMPLE, MELI_DESCRIPTION_RESPONSE_SAMPLE } = require('../../../test-data/meli-responses-samples');
 const { JSON_SIGN } = require('../../../services/consts');
 
 describe('routes/parsers', () => {
@@ -64,6 +71,58 @@ describe('routes/parsers', () => {
       };
 
       expect(parseSearchResults(input)).to.deep.equal(output);
+    });
+  });
+
+  describe('item detail parser', () => {
+    it('should get picture properly', () => {
+      const input = MELI_DETAIL_RESPONSE_SAMPLE;
+      const output = 'https://http2.mlstatic.com/D_727202-MLA44998592753_022021-O.jpg';
+
+      expect(getItemPicture(input)).to.equal(output);
+    });
+
+    it('should get null for picture attribute if no pictures on data', () => {
+      const input = {
+        ...MELI_DETAIL_RESPONSE_SAMPLE,
+        pictures: [],
+      };
+
+      const output = null;
+
+      expect(getItemPicture(input)).to.equal(output);
+    });
+
+    it('should get free shipping attributes properly', () => {
+      const input = MELI_DETAIL_RESPONSE_SAMPLE;
+      const output = true;
+
+      expect(getItemFreeShippingAttribute(input)).to.equal(output);
+    });
+
+    it('should parse everything properly', () => {
+      const dataInput = MELI_DETAIL_RESPONSE_SAMPLE;
+      const descriptionInput = MELI_DESCRIPTION_RESPONSE_SAMPLE;
+
+      const output = {
+        author: JSON_SIGN,
+        item: {
+          id: 'MLA886405497',
+          title: 'Bicicleta Nordic X3 By Slp 21v R29 Aluminio Fr. Disco Suspen',
+          condition: 'new',
+          free_shipping: true,
+          price: {
+            currency: 'ARS',
+            amount: 37998.1,
+            decimals: '10'
+          },
+          picture: 'https://http2.mlstatic.com/D_727202-MLA44998592753_022021-O.jpg',
+          sold_quantity: 56,
+          description: descriptionInput
+        },
+      };
+
+      expect(parseItemDetailData(dataInput, descriptionInput)).to.deep.equal(output);
     });
   });
 });
