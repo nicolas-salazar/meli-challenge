@@ -6,21 +6,31 @@ const { isQuerySearchValid } = require('./utils');
 
 const router = express.Router();
 
+const PARSER_ERROR = {
+  message: 'Error parsing data',
+  error: 'parser_error',
+};
+const QUERY_VALIDATION_ERROR = {
+  error: 'invalid_search',
+  message: 'The provided search is not valid. Should use format <search text>'
+};
+
 router.get('/', async (req, res) => {
   const querySearch = req.query.q;
 
   if (!isQuerySearchValid(querySearch)) {
-    res.status(412).json({
-      error: 'invalid_search',
-      message: 'The provided search is not valid. Should use format :<search text>'
-    });
-
+    res.status(412).json(QUERY_VALIDATION_ERROR);
     return;
   }
 
   try {
     const searchResults = await getSearchResults(querySearch);
-    res.status(200).json(parseSearchResults(searchResults));
+    try {
+      const parsedData = parseSearchResults(searchResults);
+      res.status(200).json(parsedData);
+    } catch (error) {
+      res.status(500).json(PARSER_ERROR);
+    }
   } catch (error) {
     res.status(error.response.status).json({
       error: error.response.data.error,
@@ -46,7 +56,12 @@ router.get('/:id', async (req, res) => {
 
   Promise.all(dataFetchingPromises)
     .then(([itemData, itemDescription]) => {
-      res.status(200).json(parseItemDetailData(itemData, itemDescription));
+      try {
+        const parsedData = parseItemDetailData(itemData, itemDescription);
+        res.status(200).json(parsedData);
+      } catch (error) {
+        res.status(500).json(PARSER_ERROR);
+      }
     })
     .catch((error) => {
       res.status(error.response.status).json({
