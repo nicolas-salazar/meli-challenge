@@ -19,10 +19,21 @@ const getPriceDecimals = (price) => {
   const splittedPriceAsText = priceAsText.split('.');
 
   if (splittedPriceAsText.length === 1) {
-    return 0;
+    return '00';
   }
 
-  return parseInt(splittedPriceAsText[1], 10);
+  if (splittedPriceAsText.length === 2) {
+    const decimalPart = splittedPriceAsText[1];
+    if (decimalPart.length === 2) {
+      return decimalPart;
+    }
+
+    if (decimalPart[0] === '0') {
+      return decimalPart;
+    }
+
+    return `${decimalPart}0`;
+  }
 };
 
 const parseItemData = (baseData, description) => ({
