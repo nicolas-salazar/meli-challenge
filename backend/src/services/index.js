@@ -1,14 +1,6 @@
 const axios = require('axios');
-const {
-  ID_REPLACER, MELI_ITEM_DATA_ENDPOINT, MELI_ITEM_DESCRIPTION_ENDPOINT, NOT_FOUND_ERROR_BASE
-} = require('./consts');
-
-const throwNoDataError = () => {
-  // eslint-disable-next-line no-new-object
-  throw new Object({
-    response: NOT_FOUND_ERROR_BASE
-  });
-};
+const { ID_REPLACER, MELI_ITEM_DATA_ENDPOINT, MELI_ITEM_DESCRIPTION_ENDPOINT } = require('./consts');
+const { throwNoDataError } = require('./utils');
 
 const getItemDataFromMeliServers = async (id) => {
   const targetUrl = MELI_ITEM_DATA_ENDPOINT.replace(ID_REPLACER, id);
