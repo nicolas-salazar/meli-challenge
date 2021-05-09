@@ -33,36 +33,36 @@ describe('routes/items utils', () => {
   });
 
   describe('items query params search validator', () => {
-    it('should approve validation for search with format `:<search>`', () => {
+    it('should approve validation for search with format `<search>`', () => {
+      const input = 'xbox';
+      const output = true;
+
+      expect(isQuerySearchValid(input)).to.equal(output);
+    });
+
+    it('should approve validation for search with one colon at the beggining', () => {
       const input = ':xbox';
       const output = true;
 
       expect(isQuerySearchValid(input)).to.equal(output);
     });
 
-    it('should approve validation for search with two colons, one at the beggining', () => {
-      const input = ':xbox:';
-      const output = true;
-
-      expect(isQuerySearchValid(input)).to.equal(output);
-    });
-
-    it('should deny validation for search with no colon', () => {
-      const input = 'xbox';
+    it('should deny validation for search with only one character', () => {
+      const input = 'a';
       const output = false;
 
       expect(isQuerySearchValid(input)).to.equal(output);
     });
 
-    it('should deny validation for search with no colon at the beggining', () => {
-      const input = 'xbox:';
+    it('should deny validation for search with no characters', () => {
+      const input = '';
       const output = false;
 
       expect(isQuerySearchValid(input)).to.equal(output);
     });
 
-    it('should deny validation for search with only one character: a colon', () => {
-      const input = ':';
+    it('should deny validation for search with sql injection', () => {
+      const input = 'xbox SELET * FROM';
       const output = false;
 
       expect(isQuerySearchValid(input)).to.equal(output);

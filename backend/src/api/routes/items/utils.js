@@ -22,7 +22,12 @@ const getPriceDecimals = (price) => {
 
 const isQuerySearchValid = (querySearch) => {
   try {
-    return querySearch[0] === ':' && !!querySearch[1];
+    if (querySearch.includes('INSERT')) return false;
+    if (querySearch.includes('SELET')) return false;
+    if (querySearch.includes('UPDATE')) return false;
+    if (querySearch.includes('DELETE')) return false;
+
+    return !!querySearch[1];
   } catch (error) {
     return false;
   }
