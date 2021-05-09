@@ -1,45 +1,76 @@
-# Express API Starter
+The <span style="color: #FFE600;">MELI</span> Challenge! [![By](https://img.shields.io/badge/By-Nicolás%20Salazar-%233483FA)](mailto:nicolas@ncodes.dev)
+====================
+##### [Backend app]
+<br/>
+What is this?
+---------------------
+* Backend application for my [techinical challenge](https://www.dropbox.com/sh/nbq7zvtqd2gb9ab/AABIy7kFj4BvLeNfbLib_Jcya?dl=0).
+* Built with **express Js**.
+* Exposes services for getting `search results` and `items by id`.
+* Uses <span style="color: #FFE600;"><b>MELI</b></span> web services for getting real data.
 
-Includes API Server utilities:
-
-* [morgan](https://www.npmjs.com/package/morgan)
-  * HTTP request logger middleware for node.js
-* [helmet](https://www.npmjs.com/package/helmet)
-  * Helmet helps you secure your Express apps by setting various HTTP headers. It's not a silver bullet, but it can help!
-* [dotenv](https://www.npmjs.com/package/dotenv)
-  * Dotenv is a zero-dependency module that loads environment variables from a `.env` file into `process.env`
-
-Development utilities:
-
-* [nodemon](https://www.npmjs.com/package/nodemon)
-  * nodemon is a tool that helps develop node.js based applications by automatically restarting the node application when file changes in the directory are detected.
-* [eslint](https://www.npmjs.com/package/eslint)
-  * ESLint is a tool for identifying and reporting on patterns found in ECMAScript/JavaScript code.
-* [mocha](https://www.npmjs.com/package/mocha)
-  * ☕️ Simple, flexible, fun JavaScript test framework for Node.js & The Browser ☕️
-* [supertest](https://www.npmjs.com/package/supertest)
-  * HTTP assertions made easy via superagent.
-
-## Setup
-
+The services ✨:
+---------------------
+- Fetch search results:
+```bash
+  GET /items?q=<your search goes here>
 ```
-npm install
+- Fetch item detail + description
+```bash
+  GET /items/<your cool item id goes here>
+```
+What's the logic behind?
+---------------------
+Exposes endpoints which takes input, fetch <span style="color: #FFE600;"><b>MELI</b></span> web services for getting data, processes the results and returns them in the way we want 🧐:
+- The exposed endpoints lays on `src/api/routes`
+- Main fetches lays on `src/services/items` and `src/services/search`
+- After getting data, uses `parsers` for molding them as needed
+- Uses custom validations
+- Is backed by super cool and **reliable** unit tests [`.spec.js`]
+
+
+Steps to setup the local environment:
+---------------------
+- Clone the repository:
+```bash
+  git clone https://github.com/nicolas-salazar/meli-challenge.git
+```
+- Go to the backend folder:
+```bash
+  cd meli-challenge/backend
+```
+- Go to the master branch:
+```bash
+  git checkout master
+```
+- Install all the needed composer packages:
+```bash
+  yarn install
 ```
 
-## Lint
+How to run it?
+---------------------
+Open a terminal at this folder's location and execute:
+```bash
+  yarn start
+```
+Or
+```bash
+  npm start
+```
 
-```
-npm run lint
-```
+Other usefull commands
+---------------------
+Thinking about my mental peace, build unit tests and integrated linter. May you'd like to check it:
 
-## Test
-
+- For running unit tests:
+```bash
+  yarn run test
 ```
-npm run test
+- For running lint check:
+```bash
+  yarn run lint
 ```
-
-## Development
-
-```
-npm run dev
-```
+Any questions/suggestions 🤔?
+--------------------
+* Feel free to send me a message to [nicolas@ncodes.dev](mailto:nicolas@ncodes.dev)
