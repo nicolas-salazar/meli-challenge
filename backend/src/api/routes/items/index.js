@@ -1,5 +1,6 @@
 const express = require('express');
 const { getItemDescriptionFromMeliServers, getItemDataFromMeliServers } = require('../../../services');
+const { parseItemData } = require('./parsers');
 
 const router = express.Router();
 
@@ -26,10 +27,7 @@ router.get('/:id', async (req, res) => {
 
   Promise.all(dataFetchingPromises)
     .then(([itemData, itemDescription]) => {
-      res.status(200).json({
-        itemData,
-        itemDescription
-      });
+      res.status(200).json(parseItemData(itemData, itemDescription));
     })
     .catch((error) => {
       res.status(error.response.status).json({
