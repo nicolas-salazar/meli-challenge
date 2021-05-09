@@ -1,3 +1,5 @@
+const { getPriceDecimals } = require('./utils');
+
 const getItemPicture = (baseData) => {
   if (baseData && baseData.pictures && baseData.pictures[0] && baseData.pictures[0].secure_url) {
     return baseData.pictures[0].secure_url;
@@ -12,28 +14,6 @@ const getItemFreeShippingAttribute = (baseData) => {
   }
 
   return null;
-};
-
-const getPriceDecimals = (price) => {
-  const priceAsText = price.toString();
-  const splittedPriceAsText = priceAsText.split('.');
-
-  if (splittedPriceAsText.length === 1) {
-    return '00';
-  }
-
-  if (splittedPriceAsText.length === 2) {
-    const decimalPart = splittedPriceAsText[1];
-    if (decimalPart.length === 2) {
-      return decimalPart;
-    }
-
-    if (decimalPart[0] === '0') {
-      return decimalPart;
-    }
-
-    return `${decimalPart}0`;
-  }
 };
 
 const parseItemData = (baseData, description) => ({

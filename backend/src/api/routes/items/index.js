@@ -1,10 +1,22 @@
 const express = require('express');
 const { getItemDescriptionFromMeliServers, getItemDataFromMeliServers } = require('../../../services');
 const { parseItemData } = require('./parsers');
+const { isQuerySearchValid } = require('./utils');
 
 const router = express.Router();
 
 router.get('/', async (req, res) => {
+  const querySearch = req.query.q;
+
+  if (!isQuerySearchValid(querySearch)) {
+    res.status(412).json({
+      error: 'invalid_search',
+      message: 'The provided search is not valid. Should use format :<search text>'
+    });
+
+    return;
+  }
+
   res.status(200).json({
     msg: 'hey guys from /'
   });
