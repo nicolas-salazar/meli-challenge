@@ -41,10 +41,10 @@ export const SearchButton = styled.div`
   display: flex;
   height: 100%;
   justify-content: center;
-  width: 40px;
+  width: 35px;
 `;
 
 export const SearchIcon = styled.img`
-  height: 18px;
-  width: 18px;
+  height: 15px;
+  width: 15px;
 `;

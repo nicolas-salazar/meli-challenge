@@ -1,5 +1,5 @@
-import React, { useCallback } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useCallback, useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   InputContainer,
@@ -11,18 +11,30 @@ import SeachIcon from '../../../../assets/search_icon.png';
 import { getSearchValue } from '../../../../store/search/selectors';
 import { setSearchValue } from '../../../../store/search';
 import { SEARCH_BAR_PLACEHOLDER } from '../../../../utils/consts';
+import { fetchSearchResults } from '../../../../store/search/slice';
 
 const SearchBar = () => {
   const dispatch = useDispatch();
   const history = useHistory();
+  const location = useLocation();
   const searchValue = useSelector(getSearchValue);
 
   const executeSearch = useCallback((targetValue) => {
     const searchQuery = targetValue || searchValue;
     if (searchQuery) {
       history.push(`/items?q=${searchQuery}`);
+      dispatch(fetchSearchResults(searchQuery));
     }
-  }, [history, searchValue]);
+  }, [dispatch, history, searchValue]);
+
+  useEffect(() => {
+    if (location.search) {
+      const queryParamValue = (location.search || '').replace('?q=', '');
+      if (queryParamValue !== searchValue) {
+        executeSearch(queryParamValue);
+      }
+    }
+  }, []);
 
   const onChangeHandler = useCallback((e) => {
     const newValue = e?.target?.value || null;
