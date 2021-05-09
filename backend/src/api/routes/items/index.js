@@ -1,6 +1,7 @@
 const express = require('express');
-const { getItemDescriptionFromMeliServers, getItemDataFromMeliServers } = require('../../../services');
-const { parseItemData } = require('./parsers');
+const { getItemDescriptionFromMeliServers, getItemDataFromMeliServers } = require('../../../services/items');
+const { getSearchResults } = require('../../../services/search');
+const { parseItemDetailData, parseSearchResults } = require('./parsers');
 const { isQuerySearchValid } = require('./utils');
 
 const router = express.Router();
@@ -17,9 +18,15 @@ router.get('/', async (req, res) => {
     return;
   }
 
-  res.status(200).json({
-    msg: 'hey guys from /'
-  });
+  try {
+    const searchResults = await getSearchResults(querySearch);
+    res.status(200).json(parseSearchResults(searchResults));
+  } catch (error) {
+    res.status(error.response.status).json({
+      error: error.response.data.error,
+      message: error.response.data.message,
+    });
+  }
 });
 
 router.get('/:id', async (req, res) => {
@@ -39,7 +46,7 @@ router.get('/:id', async (req, res) => {
 
   Promise.all(dataFetchingPromises)
     .then(([itemData, itemDescription]) => {
-      res.status(200).json(parseItemData(itemData, itemDescription));
+      res.status(200).json(parseItemDetailData(itemData, itemDescription));
     })
     .catch((error) => {
       res.status(error.response.status).json({

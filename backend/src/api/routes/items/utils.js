@@ -18,14 +18,16 @@ const getPriceDecimals = (price) => {
 
     return `${decimalPart}0`;
   }
+
+  return '00';
 };
 
 const isQuerySearchValid = (querySearch) => {
   try {
-    if (querySearch.includes('INSERT')) return false;
-    if (querySearch.includes('SELET')) return false;
-    if (querySearch.includes('UPDATE')) return false;
-    if (querySearch.includes('DELETE')) return false;
+    if (querySearch.toUpperCase().includes('INSERT')) return false;
+    if (querySearch.toUpperCase().includes('SELECT')) return false;
+    if (querySearch.toUpperCase().includes('UPDATE')) return false;
+    if (querySearch.toUpperCase().includes('DELETE')) return false;
 
     return !!querySearch[1];
   } catch (error) {

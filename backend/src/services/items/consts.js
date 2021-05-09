@@ -1,0 +1,11 @@
+const { MELI_SERVICES_HOST } = require('../consts');
+
+const ID_REPLACER = ':id';
+const MELI_ITEM_DATA_ENDPOINT = `${MELI_SERVICES_HOST}/items/${ID_REPLACER}`;
+const MELI_ITEM_DESCRIPTION_ENDPOINT = `${MELI_SERVICES_HOST}/items/${ID_REPLACER}/description`;
+
+module.exports = {
+  ID_REPLACER,
+  MELI_ITEM_DATA_ENDPOINT,
+  MELI_ITEM_DESCRIPTION_ENDPOINT,
+};

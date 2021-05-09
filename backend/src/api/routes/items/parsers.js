@@ -1,3 +1,5 @@
+const { JSON_SIGN } = require('../../../services/consts');
+const { CATEGORY_FILTER_ID } = require('../../../services/search/consts');
 const { getPriceDecimals } = require('./utils');
 
 const getItemPicture = (baseData) => {
@@ -16,27 +18,72 @@ const getItemFreeShippingAttribute = (baseData) => {
   return null;
 };
 
-const parseItemData = (baseData, description) => ({
-  author: {
-    name: 'Nicolás',
-    lastname: 'Salazar',
-  },
+const getCategories = (responseFilters) => {
+  if (!responseFilters) {
+    return [];
+  }
+
+  const categoriesFilter = responseFilters.find((item) => item.id === CATEGORY_FILTER_ID);
+  if (!categoriesFilter || !categoriesFilter.values) {
+    return [];
+  }
+
+  const primaryTree = categoriesFilter.values[0];
+  if (!primaryTree) {
+    return [categoriesFilter.name];
+  }
+
+  const categories = primaryTree.path_from_root.map((category) => category.name);
+  return [...new Set(categories)];
+};
+
+const getBaseDataItemParsed = (baseData) => ({
+  id: baseData.id,
+  title: baseData.title,
+  condition: baseData.condition,
+  free_shipping: getItemFreeShippingAttribute(baseData),
+});
+
+const parseItemDetailData = (baseData, description) => ({
+  author: JSON_SIGN,
   item: {
-    id: baseData.id,
-    title: baseData.title,
+    ...getBaseDataItemParsed(baseData),
     price: {
       currency: baseData.currency_id,
       amount: baseData.base_price,
       decimals: getPriceDecimals(baseData.base_price),
     },
     picture: getItemPicture(baseData),
-    condition: baseData.condition,
-    free_shipping: getItemFreeShippingAttribute(baseData),
     sold_quantity: baseData.sold_quantity,
     description
   }
 });
 
+const parseSearchResultData = (baseData) => ({
+  ...getBaseDataItemParsed(baseData),
+  price: {
+    currency: baseData.currency_id,
+    amount: baseData.price,
+    decimals: getPriceDecimals(baseData.price),
+  },
+  picture: baseData.thumbnail,
+});
+
+const getParsedResults = (results) => {
+  if (!results || !results.length) {
+    return [];
+  }
+
+  return results.map((item) => parseSearchResultData(item));
+};
+
+const parseSearchResults = (meliSearchResponse) => ({
+  author: JSON_SIGN,
+  categories: getCategories(meliSearchResponse.filters),
+  items: getParsedResults(meliSearchResponse.results),
+});
+
 module.exports = {
-  parseItemData,
+  parseItemDetailData,
+  parseSearchResults,
 };
