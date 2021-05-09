@@ -1,14 +1,20 @@
 import React from 'react';
 import { ThemeProvider } from 'styled-components';
 import { Provider } from 'react-redux';
+import { createBrowserHistory } from 'history';
+import { Router } from 'react-router-dom';
 import { theme } from './theme';
 import store from './store';
-import ReduxSample from './components/redux-sample';
+import Routes from './Routes';
+
+export const history = createBrowserHistory();
 
 const App = () => (
   <Provider store={store}>
     <ThemeProvider theme={theme}>
-      <ReduxSample />
+      <Router history={history}>
+        <Routes />
+      </Router>
     </ThemeProvider>
   </Provider>
 );
