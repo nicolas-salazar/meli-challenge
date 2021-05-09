@@ -7,9 +7,9 @@ const ReduxSample = () => {
   const dispatch = useDispatch();
   const loaderStatus = useSelector(getLoaderStatus);
 
-  useEffect(() => {
-    dispatch(fetchSampleData());
-  }, []);
+  // useEffect(() => {
+  //   dispatch(fetchSampleData());
+  // }, []);
 
   return (
     <div>

@@ -1,8 +1,9 @@
-import { actions, reducer as loaderReducer } from './slice';
+import { actions, reducer as searchReducer } from './slice';
 import * as selectors from './selectors';
 
 export const {
-  turnOn, turnOf,
+  resetSearchValue,
+  setSearchValue,
 } = actions;
 
 export const {
@@ -10,4 +11,4 @@ export const {
   getSearchValue,
 } = selectors;
 
-export default loaderReducer;
+export default searchReducer;
