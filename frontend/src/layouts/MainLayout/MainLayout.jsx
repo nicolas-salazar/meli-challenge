@@ -1,9 +1,10 @@
 import React from 'react';
+import Header from './components/Header';
 import { FullscreenContainer } from './styles';
 
 const MainLayout = () => (
   <FullscreenContainer>
-    <p>Hey there</p>
+    <Header />
   </FullscreenContainer>
 );
 
