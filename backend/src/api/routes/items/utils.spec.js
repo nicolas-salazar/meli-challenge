@@ -1,5 +1,5 @@
 const { expect } = require('chai');
-const { getPriceDecimals } = require('./utils');
+const { getPriceDecimals, isQuerySearchValid } = require('./utils');
 
 describe('routes/items utils', () => {
   describe('price decimal part getter', () => {
@@ -29,6 +29,43 @@ describe('routes/items utils', () => {
       const output = '02';
 
       expect(getPriceDecimals(input)).to.equal(output);
+    });
+  });
+
+  describe('items query params search validator', () => {
+    it('should approve validation for search with format `:<search>`', () => {
+      const input = ':xbox';
+      const output = true;
+
+      expect(isQuerySearchValid(input)).to.equal(output);
+    });
+
+    it('should approve validation for search with two colons, one at the beggining', () => {
+      const input = ':xbox:';
+      const output = true;
+
+      expect(isQuerySearchValid(input)).to.equal(output);
+    });
+
+    it('should deny validation for search with no colon', () => {
+      const input = 'xbox';
+      const output = false;
+
+      expect(isQuerySearchValid(input)).to.equal(output);
+    });
+
+    it('should deny validation for search with no colon at the beggining', () => {
+      const input = 'xbox:';
+      const output = false;
+
+      expect(isQuerySearchValid(input)).to.equal(output);
+    });
+
+    it('should deny validation for search with only one character: a colon', () => {
+      const input = ':';
+      const output = false;
+
+      expect(isQuerySearchValid(input)).to.equal(output);
     });
   });
 });
