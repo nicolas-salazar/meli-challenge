@@ -62,7 +62,7 @@ describe('routes/items utils', () => {
     });
 
     it('should deny validation for search with sql injection', () => {
-      const input = 'xbox SELET * FROM';
+      const input = 'xbox SELECT * FROM';
       const output = false;
 
       expect(isQuerySearchValid(input)).to.equal(output);

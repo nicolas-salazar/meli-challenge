@@ -86,4 +86,11 @@ const parseSearchResults = (meliSearchResponse) => ({
 module.exports = {
   parseItemDetailData,
   parseSearchResults,
+  parseSearchResultData,
+
+  getItemPicture,
+  getItemFreeShippingAttribute,
+  getCategories,
+  getBaseDataItemParsed,
+  getParsedResults,
 };
