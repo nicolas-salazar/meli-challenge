@@ -1,7 +1,6 @@
-The <span style="color: #FFE600;">MELI</span> Challenge! [![By](https://img.shields.io/badge/By-Nicolás%20Salazar-%233483FA)](mailto:nicolas@ncodes.dev)
+The <span style="color: #FFE600;">MELI</span> Challenge! [![App](https://img.shields.io/badge/~-Backend-red)]() [![By](https://img.shields.io/badge/By-Nicolás%20Salazar-%233483FA)](mailto:nicolas@ncodes.dev)
 ====================
-##### [Backend app]
-<br/>
+
 What is this?
 ---------------------
 * Backend application for my [techinical challenge](https://www.dropbox.com/sh/nbq7zvtqd2gb9ab/AABIy7kFj4BvLeNfbLib_Jcya?dl=0).
