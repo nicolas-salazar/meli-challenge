@@ -7,7 +7,7 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "lint": "eslint --fix src",
-    "test": "mocha \"test/**/*.spec.js\""
+    "test": "mocha **/*.spec.js"
   },
   "keywords": [],
   "author": "Nicolás Salazar <nicolas@ncodes.dev> (https://github.com/nicolas-salazar)",
@@ -25,6 +25,7 @@
     "morgan": "^1.10.0"
   },
   "devDependencies": {
+    "chai": "^4.3.4",
     "eslint": "^7.18.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-plugin-import": "^2.22.1",
