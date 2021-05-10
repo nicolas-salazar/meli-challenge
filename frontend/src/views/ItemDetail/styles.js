@@ -67,6 +67,7 @@ export const BuyButton = styled.button`
   border-radius: ${({ theme: { radius } }) => radius[2]}px;
   border: none;
   color: ${({ theme: { palette } }) => palette.white};
+  cursor: pointer;
   height: 40px;
   width: 75%;
 `;
