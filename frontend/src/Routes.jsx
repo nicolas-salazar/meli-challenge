@@ -13,7 +13,7 @@ const Routes = () => (
     <Switch>
       <Route component={SearchBox} path="/" exact />
       <Route component={ItemDetail} path="/items/:id" exact />
-      <Route component={SearchResults} path={['/items', '*']} />
+      <Route component={SearchResults} path="/items" />
     </Switch>
   </MainLayout>
 );
