@@ -1,7 +1,7 @@
 import palette from './palette';
 
 export default {
-  fontFamily: ['Open Sans', 'sans-serif'].join(','),
+  fontFamily: ['Proxima Nova'].join(','),
   title: {
     color: palette.text && palette.text.primary,
     fontSize: '28px',

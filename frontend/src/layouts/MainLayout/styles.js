@@ -2,8 +2,16 @@ import styled from 'styled-components';
 
 export const FullscreenContainer = styled.div`
   background-color: ${({ theme: { palette } }) => palette.grey['100']};
-  display: flex;
   height: 100vh;
-  overflow: scroll;
+  max-width: 100vw;
+  overflow-x: hidden;
+  overflow-y: scroll;
   width: 100vw;
+`;
+
+export const ContentColumn = styled.div`
+  display: flex;
+  padding-left: 10vw;
+  padding-right: 10vw;
+  width: 100%;
 `;

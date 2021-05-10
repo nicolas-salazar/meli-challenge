@@ -6,7 +6,7 @@ import {
   SearchButton,
   SearchIcon,
   SearchInput,
-} from './style';
+} from './styles';
 import SeachIcon from '../../../../assets/search_icon.png';
 import { getSearchValue } from '../../../../store/search/selectors';
 import { setSearchValue } from '../../../../store/search';

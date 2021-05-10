@@ -8,8 +8,7 @@ export const InputContainer = styled.div`
   flex: 9;
   height: 35px;
   justify-content: center;
-  margin-left: ${({ theme: { spacing } }) => spacing[3]}px;
-  width: 100%;
+  margin-left:  ${({ theme: { spacing } }) => spacing[1]}px;
 `;
 
 export const SearchInput = styled.input`

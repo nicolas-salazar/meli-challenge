@@ -7,13 +7,14 @@ export const HeaderContainer = styled.div`
   flex-direction: row;
   height: 60px;
   justify-content: center;
-  padding-left: ${({ theme: { spacing } }) => 5 * spacing[4]}px;
-  padding-right: ${({ theme: { spacing } }) => 5 * spacing[4]}px;
   width: 100%;
 `;
 
+export const LogoContainer = styled.div`
+  flex: 0.75;
+`;
+
 export const Logo = styled.img`
-  flex: 1;
   height: 35px;
   object-fit: contain;
 `;
