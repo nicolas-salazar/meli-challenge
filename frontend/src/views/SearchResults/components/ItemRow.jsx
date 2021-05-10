@@ -1,24 +1,36 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import {
   ItemSummaryContainer,
   LocationLabel,
-  MetadataContainer,
   PaddedContent,
   Thumbnail,
 } from './styles';
+import MetadataBox from './MetadataBox';
 
 const ItemSummary = ({ data }) => {
   const {
-    picture,
+    id,
     location,
+    picture,
+    price,
+    title,
+    ...rest
   } = data;
 
+  const goToDetail = useCallback(() => {
+    window.location.replace(`/items/${id}`);
+  }, [id]);
+
   return (
-    <ItemSummaryContainer>
+    <ItemSummaryContainer onClick={() => goToDetail()}>
       <PaddedContent>
         <Thumbnail src={picture} />
-        <MetadataContainer />
+        <MetadataBox
+          freeShipping={rest.free_shipping}
+          price={price.amount}
+          title={title}
+        />
         <LocationLabel>{location}</LocationLabel>
       </PaddedContent>
     </ItemSummaryContainer>
@@ -30,6 +42,13 @@ ItemSummary.propTypes = {
     id: PropTypes.string,
     picture: PropTypes.string,
     location: PropTypes.string,
+    price: PropTypes.objectOf({
+      amount: PropTypes.number,
+      currency: PropTypes.string,
+      decimals: PropTypes.string,
+    }),
+    title: PropTypes.string,
+    freeShipping: PropTypes.bool.isRequired,
   }).isRequired,
 };
 

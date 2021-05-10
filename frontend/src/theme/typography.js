@@ -52,6 +52,13 @@ export default {
     lineHeight: 1.36,
     fontWeight: 600,
   },
+  caption2: {
+    color: palette.text && palette.text.secondary,
+    fontSize: '12px',
+    letterSpacing: '0.4px',
+    lineHeight: 1.36,
+    fontWeight: 600,
+  },
   overline: {
     color: palette.text && palette.text.secondary,
     fontSize: '14px',
