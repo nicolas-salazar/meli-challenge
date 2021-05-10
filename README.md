@@ -8,4 +8,4 @@ What to do here?
 
 Any questions/suggestions 🤔?
 --------------------
-* Feel free to send me a message to [nicolas@ncodes.dev](mailto:nicolas@ncodes.dev)g
+* Feel free to send me a message to [nicolas@ncodes.dev](mailto:nicolas@ncodes.dev)
