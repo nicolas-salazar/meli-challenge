@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { ContentColumn } from '../../styles';
 
 export const HeaderContainer = styled.div`
   align-items:center;
@@ -17,4 +18,8 @@ export const LogoContainer = styled.div`
 export const Logo = styled.img`
   height: 35px;
   object-fit: contain;
+`;
+
+export const PaddedContent = styled(ContentColumn)`
+  width: 100%
 `;

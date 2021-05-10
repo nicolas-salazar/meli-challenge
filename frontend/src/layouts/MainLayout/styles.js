@@ -13,5 +13,8 @@ export const ContentColumn = styled.div`
   display: flex;
   padding-left: 10vw;
   padding-right: 10vw;
-  width: 100%;
+`;
+
+export const ViewContainer = styled.div`
+  margin-bottom: ${({ theme: { spacing } }) => 2 * spacing[5]}px;
 `;

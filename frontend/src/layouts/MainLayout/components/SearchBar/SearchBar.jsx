@@ -22,14 +22,15 @@ const SearchBar = () => {
   const executeSearch = useCallback((targetValue) => {
     const searchQuery = targetValue || searchValue;
     if (searchQuery) {
-      history.push(`/items?q=${searchQuery}`);
+      history.push(`/items?search=${searchQuery}`);
+      dispatch(setSearchValue(searchQuery));
       dispatch(fetchSearchResults(searchQuery));
     }
   }, [dispatch, history, searchValue]);
 
   useEffect(() => {
     if (location.search) {
-      const queryParamValue = (location.search || '').replace('?q=', '');
+      const queryParamValue = (location.search || '').replace('?search=', '');
       if (queryParamValue !== searchValue) {
         executeSearch(queryParamValue);
       }

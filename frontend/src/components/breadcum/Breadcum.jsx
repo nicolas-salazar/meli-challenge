@@ -12,7 +12,7 @@ const Breadcum = () => {
     <ContentColumn>
       <BreadcumContainer>
         {
-          categories && categories.map((category, i) => (
+          categories.map((category, i) => (
             <CategoryLink
               key={`categoryBreadcum.${category}`}
               name={category}
