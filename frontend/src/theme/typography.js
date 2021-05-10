@@ -2,6 +2,13 @@ import palette from './palette';
 
 export default {
   fontFamily: ['Proxima Nova'].join(','),
+  giant: {
+    color: palette.text && palette.text.primary,
+    fontSize: '46px',
+    letterSpacing: '0.15px',
+    lineHeight: 1.53,
+    fontWeight: 400,
+  },
   title: {
     color: palette.text && palette.text.primary,
     fontSize: '28px',

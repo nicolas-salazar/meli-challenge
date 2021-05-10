@@ -10,7 +10,7 @@ import FreeShippingIconSource from '../../../assets/shipping_icon.png';
 
 const currencyFormatter = require('currency-formatter');
 
-const MetadataBox = ({ freeShipping, price }) => (
+const MetadataBox = ({ freeShipping, price, title }) => (
   <MetadataContainer>
     <PriceLabel>
       <span>
@@ -27,14 +27,14 @@ const MetadataBox = ({ freeShipping, price }) => (
         )
       }
     </PriceLabel>
-    <TitleLabel>Tu eres linda c:</TitleLabel>
+    <TitleLabel>{title}</TitleLabel>
   </MetadataContainer>
 );
 
 MetadataBox.propTypes = {
   freeShipping: PropTypes.bool.isRequired,
   price: PropTypes.number.isRequired,
-  // title: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 export default MetadataBox;

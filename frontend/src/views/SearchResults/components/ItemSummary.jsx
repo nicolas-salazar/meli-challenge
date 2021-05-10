@@ -1,5 +1,7 @@
 import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
+import { useHistory } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 import {
   ItemSummaryContainer,
   LocationLabel,
@@ -7,6 +9,7 @@ import {
   Thumbnail,
 } from './styles';
 import MetadataBox from './MetadataBox';
+import { fetchItemDetails } from '../../../store/details/slice';
 
 const ItemSummary = ({ data }) => {
   const {
@@ -18,9 +21,13 @@ const ItemSummary = ({ data }) => {
     ...rest
   } = data;
 
+  const dispatch = useDispatch();
+  const history = useHistory();
+
   const goToDetail = useCallback(() => {
-    window.location.replace(`/items/${id}`);
-  }, [id]);
+    history.push(`/items/${id}`);
+    dispatch(fetchItemDetails(id));
+  }, [dispatch, history, id]);
 
   return (
     <ItemSummaryContainer onClick={() => goToDetail()}>
@@ -38,17 +45,16 @@ const ItemSummary = ({ data }) => {
 };
 
 ItemSummary.propTypes = {
-  data: PropTypes.objectOf({
+  data: PropTypes.shape({
     id: PropTypes.string,
     picture: PropTypes.string,
     location: PropTypes.string,
-    price: PropTypes.objectOf({
+    price: PropTypes.shape({
       amount: PropTypes.number,
       currency: PropTypes.string,
       decimals: PropTypes.string,
     }),
     title: PropTypes.string,
-    freeShipping: PropTypes.bool.isRequired,
   }).isRequired,
 };
 

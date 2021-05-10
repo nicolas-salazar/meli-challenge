@@ -1,4 +1,5 @@
 const thumbnail = {
+  large: 680,
   medium: 180,
   small: 60,
 };

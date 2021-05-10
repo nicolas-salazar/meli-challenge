@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { ResultsContainerCard } from './styles';
 import { ContentColumn } from '../../layouts/MainLayout/styles';
 import { getSearchResults } from '../../store/search/selectors';
-import ItemSummary from './components/ItemRow';
+import ItemSummary from './components/ItemSummary';
 
 const SearchResults = () => {
   const results = useSelector(getSearchResults);
