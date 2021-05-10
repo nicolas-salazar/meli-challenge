@@ -36,7 +36,8 @@ describe('routes/parsers', () => {
           amount: 39999,
           decimals: '00'
         },
-        picture: 'http://http2.mlstatic.com/D_961656-MLA45566819084_042021-O.jpg'
+        picture: 'http://http2.mlstatic.com/D_961656-MLA45566819084_042021-O.jpg',
+        location: 'Capital Federal',
       };
 
       expect(parseSearchResultData(input)).to.deep.equal(output);
@@ -65,7 +66,8 @@ describe('routes/parsers', () => {
               amount: 39999,
               decimals: '00'
             },
-            picture: 'http://http2.mlstatic.com/D_961656-MLA45566819084_042021-O.jpg'
+            picture: 'http://http2.mlstatic.com/D_961656-MLA45566819084_042021-O.jpg',
+            location: 'Capital Federal',
           }
         ]
       };

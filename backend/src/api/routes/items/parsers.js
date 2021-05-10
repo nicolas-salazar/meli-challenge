@@ -67,6 +67,7 @@ const parseSearchResultData = (baseData) => ({
     decimals: getPriceDecimals(baseData.price),
   },
   picture: baseData.thumbnail,
+  location: baseData.address.state_name
 });
 
 const getParsedResults = (results) => {
